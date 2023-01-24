@@ -1,0 +1,86 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.example.mycoin6'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.example.mycoin6"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    viewBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    // 스플래시 화면
+    implementation 'androidx.core:core-splashscreen:1.0.0'
+    // 로티 애니메이션
+    implementation 'com.airbnb.android:lottie:5.2.0'
+    // 레트로핏, 지슨 컨버터
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    // 코루틴, 뷰모델
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+
+    // by viewmodels() 종속성
+    implementation 'androidx.activity:activity-ktx:1.6.1'
+    implementation 'androidx.fragment:fragment-ktx:1.5.5'
+
+    // 데이터스토어
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    // ------------------------------------------------------------------------
+    def room_version = "2.5.0"
+    // 필수 - 룸의 기능 (roomDatabase 등)
+    implementation "androidx.room:room-runtime:$room_version"
+    // 필수 - 룸의 주석 (@Entity ~ 등)
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    kapt("androidx.room:room-compiler:$room_version")
+
+    // 선택사항 - 기기나 에뮬레이터에 실행 안하고 Room 데이터베이스, DAO 의 동작을 테스트할 수 있음
+    testImplementation "androidx.room:room-testing:$room_version"
+    def lifecycle_version = "2.5.1"
+    // 선택사항 - 룸을 liveData 와 함께 사용하려면 추가
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    // 선택사항 - liveData 클래스에 Kotlin 확장을 사용하려면 추가
+//    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    // 선택사항 - 룸을 코루틴과 함께 사용하려면 추가
+    implementation "androidx.room:room-ktx:$room_version"
+    // ------------------------------------------------------------------------
+
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
